@@ -24,16 +24,16 @@ async def read_main(text):
     doc = Doc(text)
 
     doc.segment(segmenter)
-
+    doc.tag_ner(ner_tagger)
 
     for span in doc.spans:
-        span.normalize(morph_vocab)
-    {_.text: _.normal for _ in doc.spans}
+        span.normalize(morphvocab)
+    {.text: .normal for  in doc.spans}
 
     for span in doc.spans:
         if span.type == PER:
-            span.extract_fact(names_extractor)
+            span.extract_fact(namesextractor)
 
 
 
-    return {"msg": {_.normal: _.fact.as_dict for _ in doc.spans if _.fact}}
+    return {"msg": {.normal: _.fact.asdict for  in doc.spans if _.fact}}
