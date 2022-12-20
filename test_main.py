@@ -24,3 +24,4 @@ def test_read_main():
     response = client.get("?text=The official YouTube channel for musician, author, artist and peace activist, John Lennon")
     assert response.status_code == 200
     assert response.json() == {}
+    assert response.json() == {"msg":{"Галина Петровна":{"first":"Галина","last":"Петровна"},"Бирякову Алексею Александровичу":{"first":"Алексею","last":"Бирякову","middle":"Александровичу"},"Носовой Анне Сергеевне":{"first":"Анне","last":"Носовой","middle":"Сергеевне"}}}
