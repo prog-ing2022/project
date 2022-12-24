@@ -12,7 +12,6 @@ from natasha import (
 
 app = FastAPI()
 
-
 @app.get("/")
 async def read_main(text):
     emb = NewsEmbedding()
