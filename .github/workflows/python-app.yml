@@ -5,9 +5,9 @@ name: Tests
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, CITest ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, CITest ]
 
 jobs:
   build:
@@ -24,6 +24,8 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install flake8 pytest httpx
+        pip install fastapi
+        pip install natasha
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test with pytest
       run: |
