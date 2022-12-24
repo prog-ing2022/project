@@ -35,5 +35,4 @@ async def read_main(text):
             span.extract_fact(names_extractor)
 
 
-
     return {"msg": {_.normal: _.fact.as_dict for _ in doc.spans if _.fact}}
