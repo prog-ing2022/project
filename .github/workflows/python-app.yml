@@ -26,6 +26,7 @@ jobs:
         pip install flake8 pytest httpx
         pip install fastapi
         pip install natasha
+        pip install gradio
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test with pytest
       run: |
