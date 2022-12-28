@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-import gradio as gr
 from natasha import (
     Segmenter,
     MorphVocab,
@@ -37,13 +36,3 @@ async def read_main(text):
 
 
     return {_.normal: _.fact.as_dict for _ in doc.spans if _.fact}
-
-def greet(name):
-    return "Hello " + name + "!"
-
-api = gr.Interface(
-    fn=read_main,
-    inputs=gr.Textbox(lines=2, placeholder="Name Text..."),
-    outputs="text",
-)
-api.launch()
