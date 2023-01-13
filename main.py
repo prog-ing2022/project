@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from natasha import (
     Segmenter,
     MorphVocab,
@@ -8,18 +8,22 @@ from natasha import (
     NewsEmbedding,
     Doc
 )
+from pydantic import BaseModel, EmailStr
 
 
 app = FastAPI()
 
-@app.get("/")
-async def read_main(text):
+class Text(BaseModel):
+    txt: str
+@app.post("/")
+async def read_main(txt: Text):
+
+    text = txt.txt
     emb = NewsEmbedding()
     segmenter = Segmenter()
     morph_vocab = MorphVocab()
     ner_tagger = NewsNERTagger(emb)
     names_extractor = NamesExtractor(morph_vocab)
-
 
     doc = Doc(text)
 
@@ -33,6 +37,5 @@ async def read_main(text):
     for span in doc.spans:
         if span.type == PER:
             span.extract_fact(names_extractor)
-
 
     return {_.normal: _.fact.as_dict for _ in doc.spans if _.fact}
